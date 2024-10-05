@@ -1,0 +1,46 @@
+<app-navbar [items]="items" (abrirEventEmitter)="abrirCerrarCarrito()"></app-navbar>
+<div>
+  <app-carousel></app-carousel>
+</div>
+<div id="about-us">
+  <app-about-us></app-about-us>
+</div>
+<div id="catalogoProductos" class="container">
+  <div class="row">
+        <app-product-list [productos]="productos" (productEventEmitter)="AgregarCarrito($event)"></app-product-list>
+        @if(mostrarCarrito){
+          <div class="abrir-modal animacion fadeIn">
+            <div class="modal" tabindex="-1" style="display: block;">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Carrito de Compras</h5>
+                    <button type="button" (click)="abrirCerrarCarrito()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    @if(items.length){
+                      <app-cart
+                          [items]="items"
+                          [total]="total"
+                          [totalPrecio]="dineroGastado"
+                          (idProductoEventEmitter)="onDeleteCarrito($event)"
+                          (AgregarEventEmitter)="AgregarCarrito1($event)"
+                          (DisminuirEventEmitter)="DisminuirCarrito1($event)"
+                      ></app-cart>
+                  }@else{
+                      <div class="alert alert-warning">No hay productos agregados en el carrito</div>
+                  }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+  </div>
+</div>
+<div id="visit-us">
+  <app-visit-us></app-visit-us>
+</div>
+<app-footer></app-footer>
+
+

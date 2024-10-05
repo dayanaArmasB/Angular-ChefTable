@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="product-list-title">
+    <h2 class="text-center mt-2 mb-2">Catálogo de Productos</h2>
+  </div>
+  @for (producto of productos ; track $index) {
+      <div class="col-4 my-4">
+          <app-product-card [producto]="producto"  
+          (productEventEmitter)="AgregarCarrito($event)">
+          </app-product-card>
+      </div>
+  }
+</div>

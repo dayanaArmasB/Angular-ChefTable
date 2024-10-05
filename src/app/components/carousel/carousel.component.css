@@ -1,0 +1,10 @@
+#carouselExampleSlidesOnly {
+    max-height: 650px; /* Ajusta esta altura según tus necesidades */
+    overflow: hidden;
+  }
+
+  img{
+    transform: scale(1.8);
+    transform: translateY(-100px); /* Ajusta este valor según tus necesidades */
+  }
+

@@ -1,0 +1,12 @@
+<div class="card">
+    <div class="card-header">
+         <h5> <img width="30" height="30" src="https://img.icons8.com/color/48/tableware.png" alt="tableware"/>  {{producto.nombre}}</h5>
+    </div>
+    <div class="card-body">
+        <p>Precio: {{ producto.precio }}</p>
+        <p>Unidades: {{ producto.cantidad }}</p>
+        <p>Categoría: {{ producto.categoria.nombre }}</p>
+         <button class="btn btn-primary" (click)="AgregarCarrito(producto)">
+             Agregar</button>
+     </div>
+</div>

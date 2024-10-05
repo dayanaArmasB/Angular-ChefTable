@@ -1,0 +1,45 @@
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Comestible</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>SubTotal</th>
+        <th>Agregar Unidades</th>
+        <th>Disminuir Unidades</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(item of items;track $index){
+        <tr>
+          <td>{{item.producto.nombre}}</td>
+          <td>{{item.cantidad}}</td>
+          <td>{{item.producto.precio}}</td>
+          <td>{{item.cantidad*item.producto.precio}}</td>
+          <td>
+              <button class="btn btn-primary" (click)="onAgregar(item.producto)">
+                  Agregar
+              </button>
+          </td>
+          <td>
+              <button class="btn btn-secondary" (click)="onDisminuir(item.producto)">
+                  Disminuir
+              </button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="onDeleteCarrito(item.producto.id)">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="1" class="text-end fw-bold">Total: </td>
+        <td colspan="1" class="text-end fw-bold">{{total}}</td>
+        <td colspan="2" class="text-end fw-bold">{{totalPrecio}}</td>
+      </tr>
+    </tfoot>
+  </table>
