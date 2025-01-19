@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductListComponent } from '../product-list/product-list.component';
-import { Producto } from '../../models/Producto';
-import { ProductService } from '../../services/product.service';
-import { Cartitem } from '../../models/CartItem';
-import { CartComponent } from '../cart/cart.component';
-import { NavbarComponent } from '../navbar/navbar.component';
-import {FooterComponent} from '../footer/footer.component'
-import {CarouselComponent} from '../carousel/carousel.component'
-import {AboutUsComponent} from '../about-us/about-us.component'
-import {VisitUsComponent} from '../visit-us/visit-us.component'
+import { Producto } from '../../../models/Producto';
+import { ProductService } from '../../../services/product.service';
+import { Cartitem } from '../../../models/CartItem';
+import { CartComponent } from '../components/cart/cart.component';
+import { NavbarComponent } from '../../../shared/navbar/navbar.component';
+import {FooterComponent} from '../../../shared/footer/footer.component'
+import {CarouselComponent} from '../../../shared/carousel/carousel.component'
+import {AboutUsComponent} from '../../about-us/about-us.component'
+import {VisitUsComponent} from '../../visit-us/visit-us.component'
 @Component({
   selector: 'app-product-app',
   standalone: true,
@@ -23,7 +23,7 @@ export class ProductAppComponent implements OnInit {
   dineroGastado: number = 0;
   mostrarCarrito: boolean = false;
 
-  constructor(private service: ProductService) {}
+  constructor(private readonly service: ProductService) {}
 
   ngOnInit(): void {
     this.service.getAllProductos().subscribe(res => {
