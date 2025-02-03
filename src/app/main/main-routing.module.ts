@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 // import { LayoutpageComponent } from './layoutpage/layoutpage.component';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutUsComponent } from './about-us/about-us.component';
-import { VisitUsComponent } from './visit-us/visit-us.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { VisitUsComponent } from './pages/visit-us/visit-us.component';
 import { ProductAppComponent } from './products/product-app/product-app.component';
 
 

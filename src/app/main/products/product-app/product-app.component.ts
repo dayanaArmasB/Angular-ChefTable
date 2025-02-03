@@ -7,8 +7,8 @@ import { CartComponent } from '../components/cart/cart.component';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import {FooterComponent} from '../../../shared/footer/footer.component'
 import {CarouselComponent} from '../../../shared/carousel/carousel.component'
-import {AboutUsComponent} from '../../about-us/about-us.component'
-import {VisitUsComponent} from '../../visit-us/visit-us.component'
+import {AboutUsComponent} from '../../pages/about-us/about-us.component'
+import {VisitUsComponent} from '../../pages/visit-us/visit-us.component'
 @Component({
   selector: 'app-product-app',
   standalone: true,
