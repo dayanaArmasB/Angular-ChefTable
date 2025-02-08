@@ -1,3 +1,5 @@
+<app-loader-spinner *ngIf="isLoading"></app-loader-spinner>
+
 <app-navbar [items]="items" (abrirEventEmitter)="abrirCerrarCarrito()"></app-navbar>
 <div>
   <app-carousel></app-carousel>
@@ -41,6 +43,6 @@
  <div id="visit-us">
   <app-visit-us></app-visit-us>
 </div>
-<!--<app-footer></app-footer> -->
+<app-footer></app-footer>
 
 

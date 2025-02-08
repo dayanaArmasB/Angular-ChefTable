@@ -1,0 +1,26 @@
+/* Contenedor para centrar el formulario en la pantalla */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Tarjeta del formulario */
+  .login-card {
+    width: 100%;
+    max-width: 350px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Para que los inputs y botones ocupen todo el ancho */
+  .full-width {
+    width: 100%;
+  }
+  
+  /* Centrar textos */
+  .text-center {
+    text-align: center;
+    padding: 10px;
+  }

@@ -8,43 +8,31 @@ import { User } from '../interfaces/user.interface';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
+  constructor() {}
 
-  //private baseUrl = environments.baseUrl;
-  private user?: User;
-
-  constructor(private http: HttpClient) { }
-
-  get currentUser():User|undefined {
-    if ( !this.user ) return undefined;
-    return structuredClone( this.user );
+  // Método para iniciar sesión
+  login(username: string, password: string): boolean {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (user.username === username && user.password === password) {
+      localStorage.setItem('isAuthenticated', 'true');
+      return true;
+    }
+    return false;
   }
 
-  login( email: string, password: string ):Observable<User> {
-    // http.post('login',{ email, password });
-    /*return this.http.get<User>(`${ this.baseUrl }/users/1`)
-      .pipe(
-        tap( user => this.user = user ),
-        tap( user => localStorage.setItem('token', 'aASDgjhasda.asdasd.aadsf123k' )),
-      );*/
+  // Método para registrar un usuario (simulado)
+  register(username: string, password: string) {
+    localStorage.setItem('user', JSON.stringify({ username, password }));
   }
 
-  checkAuthentication(): Observable<boolean> {
-
-    if ( !localStorage.getItem('token') ) return of(false);
-
-    const token = localStorage.getItem('token');
-
-    return this.http.get<User>(`${ this.baseUrl }/users/1`)
-      .pipe(
-        tap( user => this.user = user ),
-        map( user => !!user ),
-        catchError( err => of(false) )
-      );
-
+  // Método para verificar si el usuario está autenticado
+  isAuthenticated(): boolean {
+    return localStorage.getItem('isAuthenticated') === 'true';
   }
 
-
+  // Método para cerrar sesión
   logout() {
-    this.user = undefined;
-    localStorage.clear();
+    localStorage.removeItem('isAuthenticated');
   }
+ 
+}

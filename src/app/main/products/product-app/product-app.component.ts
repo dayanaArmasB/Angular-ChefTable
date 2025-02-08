@@ -9,10 +9,11 @@ import {FooterComponent} from '../../../shared/footer/footer.component'
 import {CarouselComponent} from '../../../shared/carousel/carousel.component'
 import {AboutUsComponent} from '../../pages/about-us/about-us.component'
 import {VisitUsComponent} from '../../pages/visit-us/visit-us.component'
+import { LoaderSpinnerComponent } from '../../../shared/loader-spinner/loader-spinner.component';
 @Component({
   selector: 'app-product-app',
   standalone: true,
-  imports: [ProductListComponent, CartComponent,NavbarComponent,FooterComponent,CarouselComponent,AboutUsComponent,VisitUsComponent],
+  imports: [ProductListComponent, CartComponent,NavbarComponent,FooterComponent,CarouselComponent,AboutUsComponent,VisitUsComponent,LoaderSpinnerComponent],
   templateUrl: './product-app.component.html',
   styleUrl: './product-app.component.css'
 })
@@ -22,12 +23,25 @@ export class ProductAppComponent implements OnInit {
   total: number = 0;
   dineroGastado: number = 0;
   mostrarCarrito: boolean = false;
+  isLoading:boolean =true;
 
   constructor(private readonly service: ProductService) {}
 
   ngOnInit(): void {
-    this.service.getAllProductos().subscribe(res => {
-      this.productos = res;
+    this.service.getAllProductos().subscribe({
+      next: (res) => {
+        this.productos = res;
+        console.log("Productos cargados:", this.productos);
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error("Error al obtener productos:", err);
+        this.isLoading = false;
+      },
+      complete: () => {
+        console.log("Carga de productos completada.");
+        this.isLoading = false;
+      }
     });
     this.items = this.items.map(item => {
       if (item.cantidad != 0) {

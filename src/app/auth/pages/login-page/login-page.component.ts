@@ -4,35 +4,41 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { MatCard, MatCardActions, MatCardContent, MatCardTitle } from '@angular/material/card';
 @Component({
   selector: 'app-login-page',
   standalone: true, 
-  imports: [ CommonModule,
-    MatFormFieldModule,
+  imports: [MatFormFieldModule,
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule],
+    MatIconModule,
+    CommonModule,
+    MatCardActions,
+    MatCardContent,
+    MatCardTitle,
+    MatCard
+  ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
 
 export class LoginPageComponent {
-  /*constructor(
-    private authService: AuthService,
-    private router: Router
-  )
-  {}*/s
+  username: string = 'dayana';
+  password: string = 'dayana';
 
-  onLogin(): void {
+  constructor(private authService: AuthService, private router: Router) {}
 
-    this.authService.login('fernando@gmail.com','123456')
-      .subscribe( user => {
+  login(): void {
+    // if (this.authService.login(this.username, this.password)) {
+    //   this.router.navigate(['/home']); // Redirigir a la página principal
+    // } else {
+    //   alert('Usuario o contraseña incorrectos');
+    // }
 
-        this.router.navigate(['/']);
-
-      });
-
+    this.router.navigate(['/home']); // Redirigir a la página principal
   }
 
 }

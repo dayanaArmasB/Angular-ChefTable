@@ -16,4 +16,9 @@ export class NavbarComponent {
   abrirCerrarCarrito():void{
     this.abrirEventEmitter.emit()
   }
+
+
+  LogOut(){
+    
+  }
 }
