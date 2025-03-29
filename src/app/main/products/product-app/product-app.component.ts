@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductListComponent } from '../product-list/product-list.component';
+import { ProductListComponent } from '../components/product-list/product-list.component';
 import { Producto } from '../../../models/Producto';
 import { ProductService } from '../../../services/product.service';
 import { Cartitem } from '../../../models/CartItem';
 import { CartComponent } from '../components/cart/cart.component';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import {FooterComponent} from '../../../shared/footer/footer.component'
-import {CarouselComponent} from '../../../shared/carousel/carousel.component'
-import {AboutUsComponent} from '../../pages/about-us/about-us.component'
-import {VisitUsComponent} from '../../pages/visit-us/visit-us.component'
+
 import { LoaderSpinnerComponent } from '../../../shared/loader-spinner/loader-spinner.component';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-product-app',
   standalone: true,
-  imports: [ProductListComponent, CartComponent,NavbarComponent,FooterComponent,CarouselComponent,AboutUsComponent,VisitUsComponent,LoaderSpinnerComponent],
+  imports: [ProductListComponent, CartComponent,NavbarComponent,FooterComponent,LoaderSpinnerComponent,CommonModule],
   templateUrl: './product-app.component.html',
   styleUrl: './product-app.component.css'
 })

@@ -5,7 +5,7 @@ import { MaterialModule } from '../material/material.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginPageComponent } from '../auth/pages/login-page/login-page.component';
+
 
 @NgModule({
   declarations: [
