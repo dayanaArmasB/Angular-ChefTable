@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    base_url: "http://localhost:8080/api/productos",
+    base_url: "http://localhost:8080/api",
     secretkey: "Lindcorp2021**",
     TIEMPO_SESSION :30,
     keyCaptcha :"6Le188opAAAAAGYVvE9DN73JMRBJoz7SBtRRXuGM",
