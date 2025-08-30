@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductListComponent } from '../components/product-list/product-list.component';
-import { Producto } from '../../../models/Producto';
-import { ProductService } from '../../../services/product.service';
-import { Cartitem } from '../../../models/CartItem';
+import { Producto } from '../../core/models/Producto';
+import { ProductService } from '../../core/services/product.service';
+import { Cartitem } from '../../core/models/CartItem';
 import { CartComponent } from '../components/cart/cart.component';
-import { NavbarComponent } from '../../../shared/navbar/navbar.component';
-import {FooterComponent} from '../../../shared/footer/footer.component'
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import {FooterComponent} from '../../shared/footer/footer.component'
 
-import { LoaderSpinnerComponent } from '../../../shared/loader-spinner/loader-spinner.component';
+import { LoaderSpinnerComponent } from '../../shared/loader-spinner/loader-spinner.component';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-product-app',

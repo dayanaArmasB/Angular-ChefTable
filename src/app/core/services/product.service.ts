@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Producto } from '../models/Producto';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 const baseUrl = environment.base_url;
 @Injectable({
   providedIn: 'root'

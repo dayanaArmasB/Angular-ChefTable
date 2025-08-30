@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Cartitem } from '../../models/CartItem';
+import { Cartitem } from '../../core/models/CartItem';
 
 @Component({
   selector: 'app-navbar',
