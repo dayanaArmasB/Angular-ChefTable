@@ -1,28 +1,43 @@
 <div class="container-fluid vh-100">
-  <div class="row h-100">
-    <!-- Lado izquierdo: Formulario -->
-    <div class="col-md-6 d-flex align-items-center justify-content-center bg-light">
+  <div class="row h-100">    <div class="col-md-6 d-flex align-items-center justify-content-center bg-light">
       <div class="w-75">
         <h2 class="mb-4 text-center">Iniciar Sesión</h2>
         <form>
           <div class="mb-3">
             <label for="email" class="form-label">Correo</label>
-            <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo">
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Ingresa tu correo"
+            />
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña">
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Ingresa tu contraseña"
+            />
           </div>
-          <button type="submit" class="btn btn-success w-100">Ingresar</button>
+          <button type="submit" class="btn btn-success w-50 d-block mx-auto">
+            Ingresar
+          </button>
+          <button type="button" (click)="goToRegister()" class="btn btn-outline-dark w-50 d-block mx-auto mt-3">
+            Registrarse
+          </button>
         </form>
       </div>
     </div>
 
-    <!-- Lado derecho: Imagen -->
-    <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center bg-white">
-      <img src="assets/login-illustration.jpg" class="img-fluid rounded shadow" alt="Login illustration">
+    <div class="col-md-6 d-none d-md-flex align-items-center p-0">
+      <video autoplay muted loop playsinline class="w-100 h-100 object-fit-cover">
+        <source src="assets/videos/video3.mp4" type="video/mp4" />
+        Tu navegador no soporta el video.
+      </video>
     </div>
+
   </div>
 </div>
-
 
