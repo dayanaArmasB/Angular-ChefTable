@@ -1,50 +1,56 @@
 <div class="container-fluid vh-100">
   <div class="row h-100">
-    <!-- Lado izquierdo: Formulario -->
+    <!-- Formulario -->
     <div class="col-md-6 d-flex align-items-center justify-content-center bg-light">
       <div class="w-75">
         <h2 class="mb-4 text-center">Iniciar Sesión</h2>
-        <form (ngSubmit)="onLogin()">
+
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <!-- Email -->
           <div class="mb-3">
             <label for="email" class="form-label">Correo</label>
             <input
               type="email"
               class="form-control"
               id="email"
-              [(ngModel)]="email"
-              name="email"
+              formControlName="email"
               placeholder="Ingresa tu correo"
-              required
             />
+            <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid"
+                 class="text-danger small">
+              Correo inválido.
+            </div>
           </div>
+
+          <!-- Password -->
           <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
             <input
               type="password"
               class="form-control"
               id="password"
-              [(ngModel)]="password"
-              name="password"
+              formControlName="password"
               placeholder="Ingresa tu contraseña"
-              required
             />
+            <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
+                 class="text-danger small">
+              Mínimo 6 caracteres.
+            </div>
           </div>
 
           <!-- Botón de login -->
-          <button type="submit" class="btn btn-success w-50 d-block mx-auto">
+          <button type="submit" class="btn btn-success w-50 d-block mx-auto" 
+                  [disabled]="loginForm.invalid">
             Ingresar
           </button>
 
           <!-- Botón para registrarse -->
-          <button
-            type="button"
-            (click)="goToRegister()"
-            class="btn btn-outline-dark w-50 d-block mx-auto mt-3"
-          >
+          <button type="button" (click)="goToRegister()" 
+                  class="btn btn-outline-dark w-50 d-block mx-auto mt-3">
             Registrarse
           </button>
 
-                    <!-- Enlace a recover -->
+          <!-- Enlace a recover -->
           <div class="text-center mt-3">
             <a (click)="goToRecover()" class="text-decoration-none" style="cursor: pointer;">
               ¿Olvidaste tu contraseña?
@@ -54,8 +60,8 @@
       </div>
     </div>
 
-    <!-- Lado derecho: Video -->
-   <div class="col-md-6 d-none d-md-flex align-items-center p-0">
+    <!-- Video -->
+    <div class="col-md-6 d-none d-md-flex align-items-center p-0">
       <video autoplay muted loop playsinline class="w-100 h-100 object-fit-cover">
         <source src="assets/videos/video3.mp4" type="video/mp4" />
         Tu navegador no soporta el video.

@@ -1,6 +1,7 @@
 <div class="container-fluid vh-100">
   <div class="row h-100">
 
+    <!-- Lado izquierdo: Video -->
     <div class="col-md-6 d-none d-md-flex align-items-center p-0">
       <video autoplay muted loop playsinline class="w-100 h-100 object-fit-cover">
         <source src="assets/videos/video1.mp4" type="video/mp4" />
@@ -8,39 +9,41 @@
       </video>
     </div>
 
+    <!-- Lado derecho: Formulario -->
     <div class="col-md-6 d-flex align-items-center justify-content-center bg-light">
       <div class="w-75">
         <h2 class="mb-4 text-center">Registrarse</h2>
-        <form>
+        <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
 
+          <!-- Email -->
           <div class="mb-3">
             <label for="email" class="form-label">Correo</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              placeholder="Ingresa tu correo"
-            />
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Ingresa tu correo" />
+            <div class="text-danger small" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+              Ingresa un correo válido
+            </div>
           </div>
+
+          <!-- Password -->
           <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              placeholder="Crea una contraseña"
-            />
+            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Crea una contraseña" />
+            <div class="text-danger small" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+              Mínimo 6 caracteres
+            </div>
           </div>
+
+          <!-- Confirm Password -->
           <div class="mb-3">
             <label for="confirm-password" class="form-label">Confirmar contraseña</label>
-            <input
-              type="password"
-              class="form-control"
-              id="confirm-password"
-              placeholder="Repite tu contraseña"
-            />
+            <input type="password" class="form-control" id="confirm-password" formControlName="confirmPassword" placeholder="Repite tu contraseña" />
+            <div class="text-danger small" *ngIf="registerForm.hasError('passwordsMismatch') && registerForm.get('confirmPassword')?.touched">
+              Las contraseñas no coinciden
+            </div>
           </div>
-          <button type="submit" class="btn btn-success w-50 d-block mx-auto">
+
+          <!-- Botones -->
+          <button type="submit" class="btn btn-success w-50 d-block mx-auto" [disabled]="registerForm.invalid">
             Registrarse
           </button>
           <button type="button" (click)="goToLogin()" class="btn btn-outline-dark w-50 d-block mx-auto mt-3">
@@ -52,3 +55,4 @@
 
   </div>
 </div>
+
