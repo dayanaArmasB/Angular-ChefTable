@@ -18,11 +18,12 @@ router = inject(Router);
   registerForm = this.fb.group(
     {
       email: ['', [Validators.required, Validators.pattern(FormUtils.emailPattern)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required,Validators.pattern(FormUtils.strongPasswordPattern)]],
       password2: ['', Validators.required],
     },
     { validators: [FormUtils.isFieldOneEqualFieldTwo('password', 'password2')] }
   );
+
 
   onRegister() {
     if (this.registerForm.invalid) {
@@ -32,7 +33,7 @@ router = inject(Router);
 
     console.log(this.registerForm.value);
 
-    this.router.navigate(['/register']);
+    this.router.navigate(['/login']);
   }
 
   goToLogin() {

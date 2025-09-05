@@ -13,37 +13,46 @@ export class FormUtils {
   static namePattern = '([a-zA-Z]+) ([a-zA-Z]+)'; // Nombre y apellido
   static emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
   static notOnlySpacesPattern = '^[a-zA-Z0-9]+$';
+static strongPasswordPattern =
+  '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-={}\\[\\]|:;"\'<>,.?/]).{8,}$';
+
 
   // ======================
   // 📌 Mostrar errores
   // ======================
-  static getTextError(errors: ValidationErrors): string | null {
-    for (const key of Object.keys(errors)) {
-      switch (key) {
-        case 'required':
-          return 'Este campo es requerido';
-        case 'minlength':
-          return `Mínimo de ${errors['minlength'].requiredLength} caracteres.`;
-        case 'maxlength':
-          return `Máximo de ${errors['maxlength'].requiredLength} caracteres.`;
-        case 'min':
-          return `Valor mínimo: ${errors['min'].min}`;
-        case 'max':
-          return `Valor máximo: ${errors['max'].max}`;
-        case 'email':
-          return `Formato de correo inválido`;
-        case 'pattern':
-          return 'El valor no cumple con el formato requerido';
-        case 'passwordsNotEqual':
-          return 'Las contraseñas no coinciden';
-        case 'emailTaken':
-          return 'El correo ya está en uso';
-        default:
-          return `Error de validación: ${key}`;
-      }
+    static getTextError(errors: ValidationErrors): string | null {
+        for (const key of Object.keys(errors)) {
+            switch (key) {
+            case 'required':
+                return 'Este campo es requerido';
+            case 'minlength':
+                return `Mínimo de ${errors['minlength'].requiredLength} caracteres.`;
+            case 'maxlength':
+                return `Máximo de ${errors['maxlength'].requiredLength} caracteres.`;
+            case 'min':
+                return `Valor mínimo: ${errors['min'].min}`;
+            case 'max':
+                return `Valor máximo: ${errors['max'].max}`;
+            case 'email':
+                return 'Formato de correo inválido';
+            case 'pattern':
+                if (errors['pattern'].requiredPattern === FormUtils.strongPasswordPattern) {
+                return 'La contraseña debe tener mínimo 8 caracteres, una mayúscula, un número y un carácter especial';
+                }
+                if (errors['pattern'].requiredPattern === FormUtils.emailPattern) {
+                return 'El valor ingresado no luce como un correo electrónico';
+                }
+                return 'El valor no cumple con el formato requerido';
+            case 'passwordsNotEqual':
+                return 'Las contraseñas no coinciden';
+            case 'emailTaken':
+                return 'El correo ya está en uso';
+            default:
+                return `Error de validación: ${key}`;
+            }
+        }
+        return null;
     }
-    return null;
-  }
 
   static isValidField(form: FormGroup, fieldName: string): boolean | null {
     return !!form.controls[fieldName]?.errors && form.controls[fieldName].touched;

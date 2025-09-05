@@ -6,13 +6,13 @@ import { Cartitem } from '../../core/models/CartItem';
 import { CartComponent } from '../components/cart/cart.component';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import {FooterComponent} from '../../shared/footer/footer.component'
-
-import { LoaderSpinnerComponent } from '../../shared/loader-spinner/loader-spinner.component';
 import { CommonModule } from '@angular/common';
+import { LoaderSpinnerComponent } from '../../shared/loaders/loader-spinner/loader-spinner.component';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-product-app',
   standalone: true,
-  imports: [ProductListComponent, CartComponent,NavbarComponent,FooterComponent,LoaderSpinnerComponent,CommonModule],
+  imports: [ProductListComponent, CartComponent,NavbarComponent,FooterComponent,LoaderSpinnerComponent,CommonModule,RouterModule],
   templateUrl: './product-app.component.html',
   styleUrl: './product-app.component.css'
 })

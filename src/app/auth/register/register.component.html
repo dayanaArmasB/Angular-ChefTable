@@ -20,7 +20,7 @@
             <label for="email" class="form-label">Correo</label>
             <input type="email" class="form-control" id="email" formControlName="email" placeholder="Ingresa tu correo" />
             <div class="text-danger small" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
-              Ingresa un correo válido
+            {{ formUtils.getFieldError(registerForm, 'email') }}
             </div>
           </div>
 
@@ -28,8 +28,8 @@
           <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
             <input type="password" class="form-control" id="password" formControlName="password" placeholder="Crea una contraseña" />
-            <div class="text-danger small" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
-              Mínimo 6 caracteres
+            <div class="text-danger small" *ngIf="formUtils.isValidField(registerForm, 'password')">
+              {{ formUtils.getFieldError(registerForm, 'password') }}
             </div>
           </div>
 
@@ -37,9 +37,10 @@
           <div class="mb-3">
             <label for="confirm-password" class="form-label">Confirmar contraseña</label>
             <input type="password" class="form-control" id="confirm-password" formControlName="confirmPassword" placeholder="Repite tu contraseña" />
-            <div class="text-danger small" *ngIf="registerForm.hasError('passwordsMismatch') && registerForm.get('confirmPassword')?.touched">
-              Las contraseñas no coinciden
+            <div class="text-danger small" *ngIf="formUtils.isValidField(registerForm, 'confirmPassword')">
+              {{ formUtils.getFieldError(registerForm, 'confirmPassword') }}
             </div>
+
           </div>
 
           <!-- Botones -->
