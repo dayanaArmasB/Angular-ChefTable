@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormUtils } from '../../shared/utils/form-utils';
 
 @Component({
   selector: 'app-register',
@@ -10,31 +11,28 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-registerForm: FormGroup;
+fb = inject(FormBuilder);
+router = inject(Router);
+  formUtils = FormUtils;
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.registerForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+  registerForm = this.fb.group(
+    {
+      email: ['', [Validators.required, Validators.pattern(FormUtils.emailPattern)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]],
-    }, {
-      validators: this.passwordsMatchValidator
-    });
-  }
-
-  // Validador custom para confirmar contraseña
-  private passwordsMatchValidator(form: FormGroup) {
-    const password = form.get('password')?.value;
-    const confirm = form.get('confirmPassword')?.value;
-    return password === confirm ? null : { passwordsMismatch: true };
-  }
+      password2: ['', Validators.required],
+    },
+    { validators: [FormUtils.isFieldOneEqualFieldTwo('password', 'password2')] }
+  );
 
   onRegister() {
-    if (this.registerForm.valid) {
-      console.log('Formulario válido', this.registerForm.value);
-      // 🚀 Aquí luego se llama al backend para registrar
-      this.router.navigate(['/login']); // simula redirección
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
     }
+
+    console.log(this.registerForm.value);
+
+    this.router.navigate(['/register']);
   }
 
   goToLogin() {

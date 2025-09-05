@@ -12,13 +12,11 @@
             <input
               type="email"
               class="form-control"
-              id="email"
               formControlName="email"
               placeholder="Ingresa tu correo"
             />
-            <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid"
-                 class="text-danger small">
-              Correo inválido.
+            <div *ngIf="formUtils.isValidField(loginForm, 'email')" class="text-danger">
+              {{ formUtils.getFieldError(loginForm, 'email') }}
             </div>
           </div>
 
@@ -28,13 +26,11 @@
             <input
               type="password"
               class="form-control"
-              id="password"
               formControlName="password"
               placeholder="Ingresa tu contraseña"
             />
-            <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
-                 class="text-danger small">
-              Mínimo 6 caracteres.
+            <div *ngIf="formUtils.isValidField(loginForm, 'password')" class="text-danger">
+              {{ formUtils.getFieldError(loginForm, 'password') }}
             </div>
           </div>
 
