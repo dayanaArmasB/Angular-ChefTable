@@ -1,0 +1,21 @@
+.welcome-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /*background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);*/
+  background: linear-gradient(135deg, #101f3d 0%, #314874 50%, #52658f 100%);
+  color: #ffffff; /* texto blanco para que contraste */
+}
+
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}

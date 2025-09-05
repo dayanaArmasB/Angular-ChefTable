@@ -20,16 +20,23 @@
             </div>
           </div>
 
-          <!-- Password -->
           <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
-            <input
-              type="password"
-              class="form-control"
-              formControlName="password"
-              placeholder="Ingresa tu contraseña"
-            />
-            <div *ngIf="formUtils.isValidField(loginForm, 'password')" class="text-danger">
+            <div class="input-group">
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                class="form-control"
+                formControlName="password"
+                placeholder="Ingresa tu contraseña"
+              />
+            <button type="button" class="btn btn-outline-secondary" 
+                    (click)="togglePasswordVisibility()" 
+                    aria-label="Mostrar u ocultar contraseña">
+              <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+            </button>
+
+            </div>
+            <div *ngIf="formUtils.isValidField(loginForm, 'password')" class="text-danger small">
               {{ formUtils.getFieldError(loginForm, 'password') }}
             </div>
           </div>

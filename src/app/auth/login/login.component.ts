@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   router = inject(Router);
   route = inject(ActivatedRoute);
   formUtils = FormUtils;
+  showPassword = false;
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.pattern(FormUtils.emailPattern)]],
@@ -47,6 +48,9 @@ ngOnInit() {
     this.router.navigate(['/recover']);
   }
 
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
 
 }
 

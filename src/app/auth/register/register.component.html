@@ -27,16 +27,42 @@
           <!-- Password -->
           <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Crea una contraseña" />
+            <div class="input-group">
+              <input 
+              [type]="showPassword ? 'text' : 'password'"
+              class="form-control" 
+              id="password" 
+              formControlName="password" 
+              placeholder="Crea una contraseña" 
+              />
+                
+              <button type="button" 
+              class="btn btn-outline-secondary" 
+                (click)="togglePasswordVisibility()" 
+                    aria-label="Mostrar u ocultar contraseña">
+                <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </button>
+            </div>
+            
             <div class="text-danger small" *ngIf="formUtils.isValidField(registerForm, 'password')">
               {{ formUtils.getFieldError(registerForm, 'password') }}
             </div>
           </div>
 
+
+
           <!-- Confirm Password -->
           <div class="mb-3">
-            <label for="confirm-password" class="form-label">Confirmar contraseña</label>
-            <input type="password" class="form-control" id="confirm-password" formControlName="confirmPassword" placeholder="Repite tu contraseña" />
+            <label for="confirm-password" 
+            class="form-label">Confirmar contraseña</label>
+            <input 
+            type="password" 
+            class="form-control" 
+            id="confirm-password" 
+            formControlName="confirmPassword" 
+            placeholder="Repite tu contraseña" />
+            
+            
             <div class="text-danger small" *ngIf="formUtils.isValidField(registerForm, 'confirmPassword')">
               {{ formUtils.getFieldError(registerForm, 'confirmPassword') }}
             </div>

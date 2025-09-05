@@ -13,17 +13,17 @@ import { FormUtils } from '../../shared/utils/form-utils';
 export class RegisterComponent {
 fb = inject(FormBuilder);
 router = inject(Router);
-  formUtils = FormUtils;
+formUtils = FormUtils;
+showPassword = false;
 
   registerForm = this.fb.group(
     {
       email: ['', [Validators.required, Validators.pattern(FormUtils.emailPattern)]],
       password: ['', [Validators.required,Validators.pattern(FormUtils.strongPasswordPattern)]],
-      password2: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
     },
-    { validators: [FormUtils.isFieldOneEqualFieldTwo('password', 'password2')] }
+    { validators: [FormUtils.isFieldOneEqualFieldTwo('password', 'confirmPassword')] }
   );
-
 
   onRegister() {
     if (this.registerForm.invalid) {
@@ -38,6 +38,10 @@ router = inject(Router);
 
   goToLogin() {
     this.router.navigate(['/login']);
+  }
+  
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }
 

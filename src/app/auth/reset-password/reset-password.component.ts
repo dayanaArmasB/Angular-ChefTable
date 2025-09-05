@@ -16,13 +16,14 @@ export class ResetPasswordComponent implements OnInit {
   route = inject(ActivatedRoute);
 
   formUtils = FormUtils;
+  
+  showPassword = false;
 
   token: string | null = null;
 
   resetForm = this.fb.group(
     {
-      password: ['', [Validators.required, Validators.
-      pattern(FormUtils.strongPasswordPattern)]],
+      password: ['', [Validators.required, Validators.pattern(FormUtils.strongPasswordPattern)]],
       password2: ['', Validators.required],
     },
     {
@@ -49,4 +50,9 @@ export class ResetPasswordComponent implements OnInit {
       queryParams: { resetSuccess: true },
     });
   }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
 }
