@@ -18,19 +18,13 @@
           <!-- Email -->
           <div class="mb-3">
             <label for="email" class="form-label">Correo</label>
-            <input 
-            type="email" 
-            class="form-control" 
-            id="email" 
-            formControlName="email" 
-            placeholder="Ingresa tu correo" 
-            [ngClass]="{
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Ingresa tu correo"
+              [ngClass]="{
             'is-valid': registerForm.get('email')?.valid && registerForm.get('email')?.touched,
             'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched
-            }"
-            />
+            }" />
             <div class="valid-feedback">
-            ¡Correo válido!
+              ¡Correo válido!
             </div>
             <div class="invalid-feedback">
               {{ formUtils.getFieldError(registerForm, 'email') }}
@@ -42,68 +36,55 @@
             <label for="password" class="form-label">Contraseña</label>
             <div class="input-group">
               <input 
-                [type]="showPassword ? 'text' : 'password'"
-                class="form-control"
-                id="password"
-                formControlName="password"
-                placeholder="Crea una contraseña"
-                [ngClass]="{
+              [type]="showPassword ? 'text' : 'password'" 
+              class="form-control"
+              id="password"
+              formControlName="password" 
+              placeholder="Crea una contraseña" 
+              [ngClass]="{
                   'is-valid': registerForm.get('password')?.valid && registerForm.get('password')?.touched,
                   'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched
-                }"
-              />
-              <button 
-                type="button" 
-                class="btn btn-outline-secondary"
-                (click)="togglePasswordVisibility()" 
+                }" />
+              <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()"
                 aria-label="Mostrar u ocultar contraseña">
                 <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
               </button>
+              <div class="valid-feedback">
+                ✅ Contraseña válida
+              </div>
+              <div class="invalid-feedback">
+                  {{ formUtils.getFieldError(registerForm, 'password') }}
+              </div>
             </div>
 
-            <div class="valid-feedback">
-              ✅ Contraseña válida
-            </div>
-            <div class="invalid-feedback">
-              {{ formUtils.getFieldError(registerForm, 'password') }}
-            </div>
+
           </div>
 
 
           <!-- Confirm Password -->
           <div class="mb-3">
-            <label for="confirm-password" 
-            class="form-label">Confirmar contraseña</label>
+            <label for="confirm-password" class="form-label">Confirmar contraseña</label>
 
-            <input 
-            type="password" 
-            class="form-control" 
-            id="confirm-password" 
-            formControlName="confirmPassword" 
-            placeholder="Repite tu contraseña" 
-            [ngClass]="{
+            <input type="password" class="form-control" id="confirm-password" formControlName="confirmPassword"
+              placeholder="Repite tu contraseña" [ngClass]="{
             'is-valid': registerForm.get('confirmPassword')?.valid && registerForm.get('confirmPassword')?.touched,
             'is-invalid': registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched
-            }"
-            />
-          
+            }" />
+
             <div class="valid-feedback">
               ✅ ¡Las contraseñas coinciden!
-           </div>
+            </div>
             <div class="invalid-feedback">
               {{ formUtils.getFieldError(registerForm, 'confirmPassword') }}
-           </div>
+            </div>
 
           </div>
 
           <!-- Botones -->
-          <button type="submit" 
-          class="btn btn-success w-50 d-block mx-auto" 
-          [disabled]="registerForm.invalid">
+          <button type="submit" class="btn btn-success w-50 d-block mx-auto" [disabled]="registerForm.invalid">
             Registrarse
           </button>
-          <button type="button" 
-          (click)="goToLogin()" class="btn btn-outline-dark w-50 d-block mx-auto mt-3">
+          <button type="button" (click)="goToLogin()" class="btn btn-outline-dark w-50 d-block mx-auto mt-3">
             Iniciar Sesión
           </button>
         </form>
@@ -112,4 +93,3 @@
 
   </div>
 </div>
-

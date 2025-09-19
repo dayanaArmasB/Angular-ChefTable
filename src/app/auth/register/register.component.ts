@@ -11,15 +11,15 @@ import { FormUtils } from '../../shared/utils/form-utils';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-fb = inject(FormBuilder);
-router = inject(Router);
-formUtils = FormUtils;
-showPassword = false;
+  fb = inject(FormBuilder);
+  router = inject(Router);
+  formUtils = FormUtils;
+  showPassword = false;
 
   registerForm = this.fb.group(
     {
       email: ['', [Validators.required, Validators.pattern(FormUtils.emailPattern)]],
-      password: ['', [Validators.required,Validators.pattern(FormUtils.strongPasswordPattern)]],
+      password: ['', [Validators.required, Validators.pattern(FormUtils.strongPasswordPattern)]],
       confirmPassword: ['', Validators.required],
     },
     { validators: [FormUtils.isFieldOneEqualFieldTwo('password', 'confirmPassword')] }
@@ -39,7 +39,7 @@ showPassword = false;
   goToLogin() {
     this.router.navigate(['/login']);
   }
-  
+
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }

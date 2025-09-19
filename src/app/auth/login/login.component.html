@@ -9,55 +9,50 @@
           <!-- Email -->
           <div class="mb-3">
             <label for="email" class="form-label">Correo</label>
-            <input 
-            type="email" 
-            class="form-control" 
-            id="email" 
-            formControlName="email" 
-            placeholder="Ingresa tu correo" 
-            [ngClass]="{
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Ingresa tu correo"
+              [ngClass]="{
             'is-valid': loginForm.get('email')?.valid && loginForm.get('email')?.touched,
             'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched
-            }"
-            />
+            }" />
             <div class="valid-feedback">
-            ¡Correo válido!
+              ¡Correo válido!
             </div>
             <div class="invalid-feedback">
               {{ formUtils.getFieldError(loginForm, 'email') }}
             </div>
           </div>
           <!-- Password -->
-          <div class="mb-3">
+                    <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
             <div class="input-group">
-              <input
-                [type]="showPassword ? 'text' : 'password'"
-                class="form-control"
-                formControlName="password"
-                placeholder="Ingresa tu contraseña"
-              />
-            <button type="button" class="btn btn-outline-secondary" 
-                    (click)="togglePasswordVisibility()" 
-                    aria-label="Mostrar u ocultar contraseña">
-              <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
-            </button>
-
-            </div>
-            <div *ngIf="formUtils.isValidField(loginForm, 'password')" class="text-danger small">
-              {{ formUtils.getFieldError(loginForm, 'password') }}
+              <input 
+              [type]="showPassword ? 'text' : 'password'" 
+              class="form-control" id="password"
+              formControlName="password" 
+              placeholder="Crea una contraseña" [ngClass]="{
+                'is-valid': loginForm.get('password')?.valid && loginForm.get('password')?.touched,
+                'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched
+                }" />
+              <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()"
+                aria-label="Mostrar u ocultar contraseña">
+                <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </button>
+              <div class="valid-feedback">
+                ✅ Contraseña válida
+              </div>
+              <div class="invalid-feedback">
+                  {{ formUtils.getFieldError(loginForm, 'password') }}
+              </div>
             </div>
           </div>
 
           <!-- Botón de login -->
-          <button type="submit" class="btn btn-success w-50 d-block mx-auto" 
-                  [disabled]="loginForm.invalid">
+          <button type="submit" class="btn btn-success w-50 d-block mx-auto" [disabled]="loginForm.invalid">
             Ingresar
           </button>
 
           <!-- Botón para registrarse -->
-          <button type="button" (click)="goToRegister()" 
-                  class="btn btn-outline-dark w-50 d-block mx-auto mt-3">
+          <button type="button" (click)="goToRegister()" class="btn btn-outline-dark w-50 d-block mx-auto mt-3">
             Registrarse
           </button>
 
@@ -80,5 +75,3 @@
     </div>
   </div>
 </div>
-
-

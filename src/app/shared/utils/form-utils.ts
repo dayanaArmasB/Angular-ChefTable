@@ -59,6 +59,7 @@ export class FormUtils {
   }
 
   static getFieldError(form: FormGroup, fieldName: string): string | null {
+    console.log(fieldName);
     if (!form.controls[fieldName]) return null;
     const errors = form.controls[fieldName].errors ?? {};
     return FormUtils.getTextError(errors);
