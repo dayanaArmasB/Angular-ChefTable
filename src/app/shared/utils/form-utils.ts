@@ -13,7 +13,7 @@ export class FormUtils {
   static namePattern = '([a-zA-Z]+) ([a-zA-Z]+)'; // Nombre y apellido
   static emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
   static notOnlySpacesPattern = '^[a-zA-Z0-9]+$';
-static strongPasswordPattern =
+  static strongPasswordPattern =
   '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-={}\\[\\]|:;"\'<>,.?/]).{8,}$';
 
 
@@ -82,13 +82,23 @@ static strongPasswordPattern =
   /** Valida que dos campos tengan el mismo valor (ej: password y password2) */
   static isFieldOneEqualFieldTwo(field1: string, field2: string): ValidatorFn {
     return (formGroup: AbstractControl): ValidationErrors | null => {
-      const field1Value = formGroup.get(field1)?.value;
-      const field2Value = formGroup.get(field2)?.value;
+    const field1Value = formGroup.get(field1)?.value;
+    const field2Control = formGroup.get(field2) as AbstractControl | null;
 
-      return field1Value === field2Value ? null : { passwordsNotEqual: true };
-    };
-  }
+    if (!field2Control) return null;
 
+    if (field1Value !== field2Control.value) {
+      field2Control.setErrors({ passwordsNotEqual: true });
+      return { passwordsNotEqual: true };
+    } else {
+      // Limpiar error si ya coinciden
+      if (field2Control.hasError('passwordsNotEqual')) {
+        field2Control.setErrors(null);
+      }
+      return null;
+    }
+  };
+}
   /** Simulación de validación asíncrona contra servidor */
   static async checkingServerResponse(
     control: AbstractControl
