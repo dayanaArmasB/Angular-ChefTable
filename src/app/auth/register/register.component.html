@@ -29,12 +29,12 @@
             'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched
             }"
             />
-      <div class="valid-feedback">
-          ¡Correo válido!
-        </div>
-        <div class="invalid-feedback">
-          {{ formUtils.getFieldError(registerForm, 'email') }}
-        </div>
+            <div class="valid-feedback">
+            ¡Correo válido!
+            </div>
+            <div class="invalid-feedback">
+              {{ formUtils.getFieldError(registerForm, 'email') }}
+            </div>
           </div>
 
           <!-- Password -->
@@ -42,38 +42,39 @@
             <label for="password" class="form-label">Contraseña</label>
             <div class="input-group">
               <input 
-              [type]="showPassword ? 'text' : 'password'"
-              class="form-control" 
-              id="password" 
-              formControlName="password" 
-              placeholder="Crea una contraseña" 
-              [ngClass]="{
-              'is-valid': registerForm.get('password')?.valid && registerForm.get('password')?.touched,
-              'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched
-              }"
+                [type]="showPassword ? 'text' : 'password'"
+                class="form-control"
+                id="password"
+                formControlName="password"
+                placeholder="Crea una contraseña"
+                [ngClass]="{
+                  'is-valid': registerForm.get('password')?.valid && registerForm.get('password')?.touched,
+                  'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched
+                }"
               />
-                
               <button 
-            type="button" 
-            class="btn btn-outline-secondary"
-            (click)="togglePasswordVisibility()" 
-            aria-label="Mostrar u ocultar contraseña">
-            <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
-          </button>
+                type="button" 
+                class="btn btn-outline-secondary"
+                (click)="togglePasswordVisibility()" 
+                aria-label="Mostrar u ocultar contraseña">
+                <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </button>
             </div>
-            
+
             <div class="valid-feedback">
-          ✅ Contraseña válida
-        </div>
-        <div class="invalid-feedback">
-          {{ formUtils.getFieldError(registerForm, 'password') }}
-        </div>
+              ✅ Contraseña válida
+            </div>
+            <div class="invalid-feedback">
+              {{ formUtils.getFieldError(registerForm, 'password') }}
+            </div>
           </div>
+
 
           <!-- Confirm Password -->
           <div class="mb-3">
             <label for="confirm-password" 
             class="form-label">Confirmar contraseña</label>
+
             <input 
             type="password" 
             class="form-control" 
@@ -85,14 +86,13 @@
             'is-invalid': registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched
             }"
             />
-            
-            
+          
             <div class="valid-feedback">
-          ✅ ¡Las contraseñas coinciden!
-        </div>
-        <div class="invalid-feedback">
-          {{ formUtils.getFieldError(registerForm, 'confirmPassword') }}
-        </div>
+              ✅ ¡Las contraseñas coinciden!
+           </div>
+            <div class="invalid-feedback">
+              {{ formUtils.getFieldError(registerForm, 'confirmPassword') }}
+           </div>
 
           </div>
 

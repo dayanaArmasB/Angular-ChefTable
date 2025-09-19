@@ -4,19 +4,27 @@
       <h2 class="text-center mb-4">Recuperar contraseña</h2>
 
       <form [formGroup]="recoverForm" (ngSubmit)="onRecover()">
-        <div class="mb-3">
-          <label for="email" class="form-label">Correo</label>
-          <input
-            id="email"
-            type="email"
-            formControlName="email"
-            class="form-control rounded-3"
-            placeholder="Ingresa tu correo"
-          />
-          <div *ngIf="formUtils.isValidField(recoverForm, 'email')" class="text-danger mt-1">
-            {{ formUtils.getFieldError(recoverForm, 'email') }}
+          <!-- Email -->
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo</label>
+            <input 
+            type="email" 
+            class="form-control" 
+            id="email" 
+            formControlName="email" 
+            placeholder="Ingresa tu correo" 
+            [ngClass]="{
+            'is-valid': recoverForm.get('email')?.valid && recoverForm.get('email')?.touched,
+            'is-invalid': recoverForm.get('email')?.invalid && recoverForm.get('email')?.touched
+            }"
+            />
+            <div class="valid-feedback">
+            ¡Correo válido!
+            </div>
+            <div class="invalid-feedback">
+              {{ formUtils.getFieldError(recoverForm, 'email') }}
+            </div>
           </div>
-        </div>
 
         <button type="submit" class="btn btn-success w-100 rounded-3"
           [disabled]="recoverForm.invalid">
