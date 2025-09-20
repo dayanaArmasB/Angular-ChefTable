@@ -4,11 +4,14 @@ import { Producto } from '../../core/models/Producto';
 import { ProductService } from '../../core/services/product.service';
 import { Cartitem } from '../../core/models/CartItem';
 import { CartComponent } from '../components/cart/cart.component';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
-import {FooterComponent} from '../../shared/footer/footer.component'
+
 import { CommonModule } from '@angular/common';
-import { LoaderSpinnerComponent } from '../../shared/loaders/loader-spinner/loader-spinner.component';
+import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
+import { FooterComponent } from '../../shared/components/footer/footer.component';
+
 import { RouterModule } from '@angular/router';
+import { LoaderSpinnerComponent } from '../../shared/components/loaders/loader-spinner/loader-spinner.component';
+
 @Component({
   selector: 'app-product-app',
   standalone: true,
