@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { Cartitem } from '../../core/models/CartItem';
 import { Router } from '@angular/router';
+import { Cartitem } from '../../../core/models/CartItem';
 
 @Component({
   selector: 'app-navbar',

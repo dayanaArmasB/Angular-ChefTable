@@ -5,20 +5,27 @@ import { Producto } from '../models/Producto';
 import { environment } from '../../../environments/environment';
 const baseUrl = environment.base_url;
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {}
 
+  get token(): string {
+    return localStorage.getItem('TOKEN_NOTIF') || '';
+  }
+
+  get headers() {
+    return {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    };
+  }
   getAllProductos(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(baseUrl + '/productos');
+    return this.http.get<Producto[]>(baseUrl + '/productos', this.headers);
   }
 
-  login(data:any): Observable<Producto[]> {
-    return this.http.post<any[]>(baseUrl + '/auth/login',data);
-  }
-
-    recoverPassword(data:any): Observable<Producto[]> {
-    return this.http.post<any[]>(baseUrl + '/auth/recover',data);
+  recoverPassword(data: any): Observable<Producto[]> {
+    return this.http.post<any[]>(baseUrl + '/auth/recover', data);
   }
 }
