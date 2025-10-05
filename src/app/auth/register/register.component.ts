@@ -19,6 +19,7 @@ export class RegisterComponent {
   formUtils = FormUtils;
   showPassword = false;
   registerService = inject(AuthService);
+    loading: boolean = false;
 
   registerForm = this.fb.group(
     {
@@ -40,10 +41,11 @@ export class RegisterComponent {
       (resp: any) => { 
         this.alertService.success('Registro exitoso. Ahora puedes iniciar sesión.');
         this.router.navigate(['/login']);
+        this.loading = false;
     },
       (err) => {
-        this.alertService.error('Usuario o password incorrectos');
-
+        this.alertService.error('Error en el registro. Inténtalo de nuevo.');
+        this.loading = false;
       }
     );
   }
