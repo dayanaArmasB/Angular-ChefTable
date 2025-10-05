@@ -13,7 +13,11 @@ export class AuthService {
     return this.http.post<any[]>(baseUrl + '/auth/login', data);
   }
 
-  setToken(token: any) {
+  setToken(token: any): void {
     localStorage.setItem(`TOKEN_NOTIF`, token);
+  }
+
+  registerUser(data: any): Observable<any> {
+    return this.http.post<any>(`${baseUrl}/auth/register`, data);
   }
 }

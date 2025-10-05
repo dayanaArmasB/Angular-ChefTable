@@ -25,7 +25,5 @@ export class ProductService {
     return this.http.get<Producto[]>(baseUrl + '/productos', this.headers);
   }
 
-  recoverPassword(data: any): Observable<Producto[]> {
-    return this.http.post<any[]>(baseUrl + '/auth/recover', data);
-  }
+
 }

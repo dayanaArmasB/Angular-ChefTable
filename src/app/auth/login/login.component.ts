@@ -10,6 +10,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormUtils } from '../../shared/utils/form-utils';
 import { AuthService } from '../../core/services/auth.service';
+import { AlertService } from '../../shared/services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
   formUtils = FormUtils;
   showPassword: boolean = false;
   loading: boolean = false;
+  alertService = inject(AlertService);
 
   loginForm = this.fb.group({
     email: [
@@ -53,25 +55,17 @@ export class LoginComponent implements OnInit {
       this.loginForm.markAllAsTouched();
       return;
     }
-
     const { email, password } = this.loginForm.value;
     const formData = { address: email, password };
-    // const formData = this.loginForm.value;
     this.loading = true;
     this.loginService.login(formData).subscribe(
-      (resp: any) => {
-        console.log(resp);
-
+      (resp: any) => {       
         this.loginService.setToken(resp.token);
         this.router.navigate(['/catalogo']);
-        // this.loginService.setCookie('user_name', resp.usuarioDB.nombre);
-        // this.loginService.setCookie('user_profile', resp.usuarioDB.profile);
-
         this.loading = false;
       },
       (err) => {
-        console.error(err);
-        // this.alertService.topCenter('Usuario o password incorrectos', 'warning');
+        this.alertService.error('Usuario o password incorrectos');
         this.loading = false;
       }
     );
