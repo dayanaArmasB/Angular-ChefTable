@@ -1,16 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormUtils } from '../../shared/utils/form-utils';
 import { AlertService } from '../../shared/services/alert.service';
 import { AuthService } from '../../core/services/auth.service';
+import { RegisterUserResponse } from '../dto/registerUserResponse';
 
 @Component({
   selector: 'app-register',
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.css',
 })
 export class RegisterComponent {
   fb = inject(FormBuilder);
@@ -19,15 +25,28 @@ export class RegisterComponent {
   formUtils = FormUtils;
   showPassword = false;
   registerService = inject(AuthService);
-    loading: boolean = false;
+  loading: boolean = false;
 
   registerForm = this.fb.group(
     {
-      email: ['', [Validators.required, Validators.pattern(FormUtils.emailPattern)]],
-      password: ['', [Validators.required, Validators.pattern(FormUtils.strongPasswordPattern)]],
+      email: [
+        '',
+        [Validators.required, Validators.pattern(FormUtils.emailPattern)],
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(FormUtils.strongPasswordPattern),
+        ],
+      ],
       confirmPassword: ['', Validators.required],
     },
-    { validators: [FormUtils.isFieldOneEqualFieldTwo('password', 'confirmPassword')] }
+    {
+      validators: [
+        FormUtils.isFieldOneEqualFieldTwo('password', 'confirmPassword'),
+      ],
+    },
   );
 
   onRegister() {
@@ -36,17 +55,25 @@ export class RegisterComponent {
       return;
     }
     const { email, password } = this.registerForm.value;
-    const formData = { address: email, password };
+    const formData = { address: email ?? '', password: password ?? '' };
     this.registerService.registerUser(formData).subscribe(
-      (resp: any) => { 
-        this.alertService.success('Registro exitoso. Ahora puedes iniciar sesión.');
-        this.router.navigate(['/login']);
-        this.loading = false;
-    },
+      (resp: RegisterUserResponse) => {
+        if (resp.success) {
+          this.alertService.success(
+            'Registro exitoso. Ahora puedes iniciar sesión.',
+          );
+          this.router.navigate(['/login']);
+          this.loading = false;
+        } else {
+          this.alertService.error(
+            resp.message || 'Error en el registro. Inténtalo de nuevo.',
+          );
+        }
+      },
       (err) => {
         this.alertService.error('Error en el registro. Inténtalo de nuevo.');
         this.loading = false;
-      }
+      },
     );
   }
 
@@ -58,4 +85,3 @@ export class RegisterComponent {
     this.showPassword = !this.showPassword;
   }
 }
-
