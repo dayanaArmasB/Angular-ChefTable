@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { RegisterUserResponse } from '../../auth/dto/registerUserResponse';
 import { RegisterUserRequest } from '../../auth/dto/registerUserRequest';
+import { LoginRequest } from '../../auth/dto/LoginRequest';
+import { LoginResponse } from '../../auth/dto/LoginResponse';
 const baseUrl = environment.base_url;
 @Injectable({
   providedIn: 'root',
@@ -11,15 +13,19 @@ const baseUrl = environment.base_url;
 export class AuthService {
   constructor(private readonly http: HttpClient) {}
 
-  login(data: any): Observable<any[]> {
-    return this.http.post<any[]>(baseUrl + '/auth/login', data);
+  login(data: LoginRequest): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(
+      `${baseUrl}/auth/login`,
+      data
+    );
   }
 
   setToken(token: any): void {
     localStorage.setItem(`TOKEN_NOTIF`, token);
   }
 
-  registerUser(data: RegisterUserRequest): Observable<any> {
-    return this.http.post<RegisterUserResponse>(`${baseUrl}/auth/register`, data);
-  }
+registerUser(data: RegisterUserRequest): Observable<RegisterUserResponse> {
+  return this.http.post<RegisterUserResponse>(`${baseUrl}/auth/register`, data);
+}
+
 }

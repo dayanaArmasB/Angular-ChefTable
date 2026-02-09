@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormUtils } from '../../shared/utils/form-utils';
 import { AuthService } from '../../core/services/auth.service';
 import { AlertService } from '../../shared/services/alert.service';
+import { LoginResponse } from '../dto/LoginResponse';
 
 @Component({
   selector: 'app-login',
@@ -50,28 +51,40 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onLogin() {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-      return;
-    }
-    const { email, password } = this.loginForm.value;
-    const formData = { address: email, password };
-    this.loading = true;
-    this.loginService.login(formData).subscribe(
-      (resp: any) => {       
-        this.loginService.setToken(resp.token);
-        this.router.navigate(['/catalogo']);
-        this.loading = false;
-      },
-      (err) => {
-        this.alertService.error('Usuario o password incorrectos');
-        this.loading = false;
-      }
-    );
-    // 👇 Por ahora, simular login con cualquier credencial
-    // this.router.navigate(['/catalogo']);
+onLogin() {
+  if (this.loginForm.invalid) {
+    this.loginForm.markAllAsTouched();
+    return;
   }
+
+  const { email, password } = this.loginForm.value;
+  const formData = { address: email ?? '', password: password ?? '' };
+
+  this.loading = true;
+
+  this.loginService.login(formData).subscribe(
+    (resp: LoginResponse) => {
+      if (resp.success) {
+        // ✅ Guardar token solo si el login fue exitoso
+        this.loginService.setToken(resp.token);
+
+        this.alertService.success('Inicio de sesión exitoso');
+        this.router.navigate(['/catalogo']);
+      } else {
+        this.alertService.error(
+          resp.message || 'Usuario o contraseña incorrectos',
+        );
+      }
+      this.loading = false;
+    },
+    () => {
+      this.alertService.error('Error de conexión con el servidor');
+      this.loading = false;
+    }
+  );
+}
+
+
 
   goToRegister() {
     this.router.navigate(['/register']);
